@@ -26,10 +26,10 @@ impl<F: Field, const N_POP: usize, const N_PUSH: usize, const S: ExecutionState>
     const EXECUTION_STATE: ExecutionState = S;
 
     fn configure(cb: &mut ConstraintBuilder<F>) -> Self {
-        log::warn!(
-            "evm circuit: ExecutionState::{:?} is implemented with DummyGadget",
-            S
-        );
+        // log::warn!(
+        //     "evm circuit: ExecutionState::{:?} is implemented with DummyGadget",
+        //     S
+        // );
         let pops: [Word<F>; N_POP] = [(); N_POP].map(|_| cb.query_word());
         let pushes: [Word<F>; N_PUSH] = [(); N_PUSH].map(|_| cb.query_word());
         for pop in pops.iter() {

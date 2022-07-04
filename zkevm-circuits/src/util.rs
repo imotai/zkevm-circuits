@@ -14,18 +14,18 @@ pub(crate) trait Expr<F: FieldExt> {
 #[macro_export]
 macro_rules! impl_expr {
     ($type:ty) => {
-        impl<F: FieldExt> $crate::util::Expr<F> for $type {
+        impl<F: halo2_proofs::arithmetic::FieldExt> $crate::util::Expr<F> for $type {
             #[inline]
             fn expr(&self) -> Expression<F> {
-                Expression::Constant(F::from(*self as u64))
+                halo2_proofs::plonk::Expression::Constant(F::from(*self as u64))
             }
         }
     };
     ($type:ty, $method:path) => {
-        impl<F: FieldExt> Expr<F> for $type {
+        impl<F: halo2_proofs::arithmetic::FieldExt> Expr<F> for $type {
             #[inline]
             fn expr(&self) -> Expression<F> {
-                Expression::Constant(F::from($method(self) as u64))
+                halo2_proofs::plonk::Expression::Constant(F::from($method(self) as u64))
             }
         }
     };
